@@ -1,0 +1,131 @@
+---
+title: "Find gene"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+install.packages("bio3d")
+```
+```{r}
+library(bio3d)
+
+```
+```{r}
+setwd("/Users/-----/Downloads/A2")
+```
+
+
+```{r}
+aln.seq<-read.fasta("REsmore.fasta")
+```
+
+```{r}
+pre.heat.data<-seqidentity(aln.seq)
+
+```
+
+```{r}
+par(oma=c(6,2,1,4))  # space for outer margins
+par(mar=c(5,4,4,2) + 0.1) #should change the margin 
+heatmap(pre.heat.data, symm=TRUE)
+```
+```{r}
+jpeg(file="heatmapFG.jpg")
+heatmap(pre.heat.data)
+dev.off()
+```
+```{r}
+
+```
+
+```{r}
+more.aln<-read.fasta("Results copy.fasta", )
+```
+```{r}
+df<-seqidentity(more.aln)
+```
+
+```{r}
+par(oma=c(9,0,1,1))  
+par(mar=c(0,0,0,0) + 0)
+heatmap(df, scale = "row")
+
+```
+```{r}
+heatmap(df, scale = "none")
+```
+
+
+```{r}
+pre.heat.data1<-seqidentity(more.aln)
+```
+```{r}
+par(oma=c(6,2,1,4))  # space for outer margins
+par(mar=c(5,4,4,2) + 0.1)
+heatmap(pre.heat.data1, symm=TRUE)
+```
+```{r}
+heatmap(pre.heat.data1)
+```
+
+```{r}
+jpeg(file="sample1.jpeg")
+par(oma=c(6,2,1,4))  # space for outer margins
+par(mar=c(5,4,4,2) + 0.1)
+heatmap(pre.heat.data1, symm=TRUE)
+
+dev.off()
+```
+
+```{r}
+install.packages("gplots")
+```
+```{r}
+library("gplots")
+```
+
+```{r}
+par(oma=c(5,0,0,4))  # space for outer margins
+
+heatmap.2(df, scale = "none", col = bluered(100), 
+          trace = "none", density.info = "none")
+```
+
+```{r}
+# Margins area
+par(oma=c(5,0,3,3)) # all sides have 3 lines of space
+par(mar=c(5,4,4,2) + 0.1)
+
+# Plot
+plot(0:10, 0:10, type="n", xlab="X", ylab="Y") # type="n" hides the points
+
+# Place text in the plot and color everything plot-related red
+text(5,5, "Plot", col="red", cex=2)
+box(col="red")
+
+# Place text in the margins and label the margins, all in forestgreen  
+mtext("Margins", side=3, line=2, cex=2, col="forestgreen")  
+mtext("par(mar=c(b,l,t,r))", side=3, line=1, cex=1, col="forestgreen")  
+mtext("Line 0", side=3, line=0, adj=1.0, cex=1, col="forestgreen")  
+mtext("Line 1", side=3, line=1, adj=1.0, cex=1, col="forestgreen")  
+mtext("Line 2", side=3, line=2, adj=1.0, cex=1, col="forestgreen")  
+mtext("Line 3", side=3, line=3, adj=1.0, cex=1, col="forestgreen")  
+box("figure", col="forestgreen")  
+ 
+# Label the outer margin area and color it blue  
+# Note the 'outer=TRUE' command moves us from the figure margins to the outer margins.  
+mtext("Outer Margin Area", side=1, line=1, cex=2, col="blue", outer=TRUE)  
+mtext("par(oma=c(b,l,t,r))", side=1, line=2, cex=1, col="blue", outer=TRUE)  
+mtext("Line 0", side=1, line=0, adj=0.0, cex=1, col="blue", outer=TRUE)  
+mtext("Line 1", side=1, line=1, adj=0.0, cex=1, col="blue", outer=TRUE)  
+mtext("Line 2", side=1, line=2, adj=0.0, cex=1, col="blue", outer=TRUE)  
+box("outer", col="blue")  
+
+```
+
